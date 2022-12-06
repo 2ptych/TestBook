@@ -1,0 +1,9 @@
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.deps.json
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.dll
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.pdb
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csprojAssemblyReference.cache
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfo.cs
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
+C:\Users\Nick\source\repos\TestBooks\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb

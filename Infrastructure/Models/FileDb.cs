@@ -10,6 +10,6 @@ namespace Infrastructure.Models
         public string FileName { get; set; }
         public string Hash { get; set; }
         //
-        public virtual List<BookFileJoinDb> BookFileJoin { get; set; }
+        //public virtual List<BookFileJoinDb> BookFileJoin { get; set; }
     }
 }

@@ -16,6 +16,8 @@ namespace Infrastructure.Seed
 
             if (context.Users.Any()) return;
 
+            context.Category.AddRange();
+
             context.Users.AddRange(SeedUsers);
             context.SaveChanges();
         }

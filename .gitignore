@@ -1,0 +1,7 @@
+Api/bin
+Api/obj
+Application/bin
+Application/obj
+Infrastructure/bin
+Infrastructure/obj
+.vs

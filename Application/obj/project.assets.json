@@ -1567,11 +1567,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nick\\Desktop\\TestBooks\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Users\\Nick\\Desktop\\TestBooks\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nick\\Desktop\\TestBooks\\Application\\obj\\",
+      "outputPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1590,8 +1590,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Nick\\Desktop\\TestBooks\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Nick\\Desktop\\TestBooks\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }

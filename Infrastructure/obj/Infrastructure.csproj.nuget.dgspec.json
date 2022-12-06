@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nick\\Desktop\\TestBooks\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nick\\Desktop\\TestBooks\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nick\\Desktop\\TestBooks\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Nick\\Desktop\\TestBooks\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nick\\Desktop\\TestBooks\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

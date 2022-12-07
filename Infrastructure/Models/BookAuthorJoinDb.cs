@@ -10,5 +10,6 @@ namespace Infrastructure.Models
         public virtual BookDb Book { get; set; }
         public int AuthorId { get; set; }
         public virtual AuthorDb Author { get; set; }
+        public int Order { get; set; }
     }
 }

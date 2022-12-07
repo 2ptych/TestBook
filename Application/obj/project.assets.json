@@ -1561,23 +1561,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nick\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Nikolay\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Application\\Application.csproj",
-      "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Application\\obj\\",
+      "projectPath": "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Application\\Application.csproj",
+      "packagesPath": "C:\\Users\\Nikolay\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Application\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nikolay\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1589,9 +1585,10 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -1604,6 +1601,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "FluentValidation.AspNetCore": {
             "target": "Package",
@@ -1645,14 +1643,11 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
       }
     }
   }

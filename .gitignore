@@ -1,5 +1,6 @@
 Api/bin
-Api/obj
+/Api/obj
+Api/wwwroot
 Application/bin
 Application/obj
 Infrastructure/bin

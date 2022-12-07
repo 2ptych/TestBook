@@ -11,5 +11,7 @@ namespace Infrastructure.Interfaces
         void AddFile(FileDb newEntry);
         void Add(BookDb newEntry);
         void Delete(int id);
+        List<CategoryDb> GetCategoryLstByIds(List<int> ids);
+        List<AuthorDb> GetAuthorLstByIds(List<int> ids);
     }
 }

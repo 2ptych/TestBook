@@ -34,8 +34,34 @@ namespace Application.Services
                 PageCount = requestDto.PageCount,
                 Title = requestDto.Title,
                 Year = requestDto.Year,
-                Cover = file
+                Cover = file,
+                BookCategoryJoin = new List<BookCategoryJoin>(),
+                BookAuthorJoin = new List<BookAuthorJoinDb>()
             };
+
+            List<CategoryDb> categories =
+                _bookRepository.GetCategoryLstByIds(requestDto.CategoryIds);
+
+            foreach (var cat in categories)
+            {
+                newEntry.BookCategoryJoin.Add(new BookCategoryJoin
+                {
+                    Book = newEntry,
+                    Category = cat
+                });
+            }
+
+            List<AuthorDb> authors =
+                _bookRepository.GetAuthorLstByIds(requestDto.AuthorIds);
+
+            foreach (var auth in authors)
+            {
+                newEntry.BookAuthorJoin.Add(new BookAuthorJoinDb
+                {
+                    Book = newEntry,
+                    Author = auth
+                });
+            }
 
             _bookRepository.Add(newEntry);
         }
@@ -45,9 +71,10 @@ namespace Application.Services
             _bookRepository.Delete(requestDto.Id);
         }
 
+        #region Helpers
         private FileDb SaveFile(IFormFile file)
         {
-            string savePath = Path.Combine(_hosting.ContentRootPath, "uploads");
+            string savePath = Path.Combine(_hosting.ContentRootPath, "wwwroot", "uploads");
 
             var stream = new MemoryStream();
             file.CopyTo(stream);
@@ -62,8 +89,11 @@ namespace Application.Services
 
             var existedFile = _bookRepository.GetFileByHashOrNull(result.Hash);
 
-            if (existedFile != null)
+            if (existedFile == null)
             {
+                if (!Directory.Exists(savePath))
+                    Directory.CreateDirectory(savePath);
+
                 using (var fStream = new FileStream(
                     fullPath, FileMode.Create, FileAccess.Write))
                 {
@@ -88,5 +118,6 @@ namespace Application.Services
                     .ToLower();
             }
         }
+        #endregion
     }
 }

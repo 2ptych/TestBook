@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.DTOs;
@@ -22,27 +23,34 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/book/add")]
-        public async Task<object> AddBook(AddBookRequestDto requestDto)
+        public async Task<object> AddBook(
+            [FromForm] AddBookRequestDto requestDto)
         {
             try
             {
-                if ((Request.Form.Files != null) &&
-                    (Request.Form.Files.Count == 1))
+                if ((HttpContext.Request.Form.Files != null) &&
+                    (HttpContext.Request.Form.Files.Count == 1))
                 {
                     requestDto.File = Request.Form.Files[0];
-                    _bookService.Add(requestDto);
-                    return Ok();
+
+                    if (CheckAllowedFileFormat(requestDto.File))
+                    {
+                        _bookService.Add(requestDto);
+                        return Ok();
+                    }
                 }
-                else 
-                    return BadRequest("В качестве обложки необходимо приложить 1 файл");
+                
+                return BadRequest(
+                    "В качестве обложки необходимо " +
+                    "приложить 1 файл в формате jpg");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest("Не удалось добавить книгу");
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/book/delete/{requestDto.Id}")]
         public async Task<object> DeleteBook(DeleteBookRequestDto requestDto)
         {
@@ -58,8 +66,42 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("api/book/update")]
+        public async Task<object> UpdateBook(DeleteBookRequestDto requestDto)
         {
+            try
+            {
+                _bookService.Delete(requestDto);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Не удалось удалить книгу");
+            }
         }
+
+        #region Helpers
+        private bool CheckAllowedFileFormat(IFormFile file)
+        {
+            bool result = false;
+            List<string> allowedExtensions = new List<string>
+            {
+                ".jpg"
+            };
+
+            string extension = Path.GetExtension(file.FileName).ToLower();
+
+            foreach (var ext in allowedExtensions)
+            {
+                if (ext == extension)
+                {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

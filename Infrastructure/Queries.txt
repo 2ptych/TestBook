@@ -1,0 +1,7 @@
+﻿select bk.*, auth."FullName" from "Book" bk
+inner join "BookAuthorJoin" baj
+on baj."BookId" = bk."Id"
+inner join "Author" auth
+on auth."Id" = baj."AuthorId"
+order by bk."Id", baj."Order"
+

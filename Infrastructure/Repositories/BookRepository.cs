@@ -51,5 +51,23 @@ namespace Infrastructure.Repositories
             _context.Book.Remove(result);
             _context.SaveChanges();
         }
+
+        public List<CategoryDb> GetCategoryLstByIds(List<int> ids)
+        {
+            List<CategoryDb> cats = _context.Category
+                .Where(x => ids.Contains(x.Id))
+                .ToList();
+
+            return cats;
+        }
+
+        public List<AuthorDb> GetAuthorLstByIds(List<int> ids)
+        {
+            List<AuthorDb> auth = _context.Author
+                .Where(x => ids.Contains(x.Id))
+                .ToList();
+
+            return auth;
+        }
     }
 }

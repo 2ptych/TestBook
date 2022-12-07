@@ -65,6 +65,7 @@ namespace Infrastructure.Context
         public DbSet<BookAuthorJoinDb> BookAuthorJoin { get; set; }
         public DbSet<CategoryDb> Category { get; set; }
         public DbSet<FileDb> File { get; set; }
+        public DbSet<AuthorDb> Author { get; set; }
 
     }
 }

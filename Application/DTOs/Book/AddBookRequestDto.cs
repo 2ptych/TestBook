@@ -12,5 +12,7 @@ namespace Application.DTOs
         public int PageCount { get; set; }
         public int Year { get; set; }
         public IFormFile File { get; set; }
+        public List<int> CategoryIds { get; set; }
+        public List<int> AuthorIds { get; set; }
     }
 }

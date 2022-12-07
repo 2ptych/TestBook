@@ -24,17 +24,40 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/login")]
-        public async Task<object> GetHash(LoginRequestDto requestDto)
+        public async Task<object> Login(LoginRequestDto requestDto)
         {
             try
             {
                 var result = _authenticationService.LoginAsync(requestDto);
                 return result;
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized();
+            }
             catch (Exception ex)
             {
+                return BadRequest();
+            }
+            
+        }
 
-                throw;
+        [HttpPost]
+        [Route("api/refresh")]
+        public async Task<object> RefreshToken([FromBody] RefreshTokenDto requestDto)
+        {
+            try
+            {
+                var result = _authenticationService.RefreshToken(requestDto);
+                return result;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return new ForbidResult();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
             }
         }
     }

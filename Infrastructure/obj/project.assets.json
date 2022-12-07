@@ -906,19 +906,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nikolay\\.nuget\\packages\\": {}
+    "C:\\Users\\Nick\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Nikolay\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nick\\source\\TestBooks\\TestBook\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Nikolay\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -930,7 +934,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -942,7 +945,6 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -984,7 +986,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

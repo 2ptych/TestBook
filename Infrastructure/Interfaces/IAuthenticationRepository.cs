@@ -10,5 +10,7 @@ namespace Infrastructure.Interfaces
         UserDb GetUserByUserNameOrNull(string userName);
         void AddRefreshToken(
             string token, string userName, DateTime expiredAt);
+        string GetMD5Hash(string str);
+        RefreshTokenDb GetRefreshTokenByHash(string hash);
     }
 }

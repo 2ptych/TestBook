@@ -37,6 +37,7 @@ namespace Application.Services
                         user.Role.Title.ToLower());
                 var refreshTokenData =
                     _tokenIssuerService.IssueRefreshToken(requestDto.Login);
+
                 _authenticationRepository.AddRefreshToken(
                     refreshTokenData.RefreshToken,
                     requestDto.Login,
@@ -44,8 +45,24 @@ namespace Application.Services
 
                 result.RefreshToken = refreshTokenData.RefreshToken;
             }
+            else
+                throw new UnauthorizedAccessException();
 
             return result;
+        }
+
+        public LoginResponseDto RefreshToken(RefreshTokenDto requestDto)
+        {
+            var hash =
+                _authenticationRepository.GetMD5Hash(requestDto.RefreshToken);
+
+            if (hash != null)
+            {
+
+            }
+            else throw new UnauthorizedAccessException();
+
+            return new LoginResponseDto();
         }
 
         private bool IsPasswordsMatch(UserDb user, string password)

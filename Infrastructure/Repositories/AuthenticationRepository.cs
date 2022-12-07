@@ -45,7 +45,19 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        private string GetMD5Hash(string str)
+        public RefreshTokenDb GetRefreshTokenByHash(string hash)
+        {
+            var token = _context.RefreshTokens
+                .Where(x =>
+                    (x.IsRevoked == false) &&
+                    (x.IsUsed == false))
+                .Where(x => x.TokenHash == hash)
+                .FirstOrDefault();
+
+            return token;
+        }
+
+        public string GetMD5Hash(string str)
         {
             byte[] inputBytes;
             byte[] hashBytes;

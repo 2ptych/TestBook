@@ -8,6 +8,7 @@ namespace Application.Interfaces
     public interface IBookService
     {
         void Add(AddBookRequestDto requestDto);
+        void Update(UpdateBookRequestDto requestDto);
         void Delete(DeleteBookRequestDto requestDto);
     }
 }

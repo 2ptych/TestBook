@@ -10,7 +10,9 @@ namespace Infrastructure.Interfaces
         FileDb GetFileByHashOrNull(string hash);
         void AddFile(FileDb newEntry);
         void Add(BookDb newEntry);
+        BookDb GetById(int id);
         void Delete(int id);
+        void DropBookRelations(BookDb book);
         List<CategoryDb> GetCategoryLstByIds(List<int> ids);
         List<AuthorDb> GetAuthorLstByIds(List<int> ids);
     }

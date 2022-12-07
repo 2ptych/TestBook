@@ -9,6 +9,7 @@ using Application.Services;
 using Infrastructure.Context;
 using Infrastructure.Interfaces;
 using Infrastructure.Repositories;
+using Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -45,7 +46,7 @@ namespace Api
             services.AddTransient<ITokenIssuerService, TokenIssuerService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
-            
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IBookService, BookService>();
             services.AddTransient<IBookRepository, BookRepository>();
         }

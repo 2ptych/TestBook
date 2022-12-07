@@ -61,7 +61,7 @@ namespace Infrastructure.Context
         public DbSet<UserDb> Users { get; set; }
         public DbSet<BookDb> Book { get; set; }
         public DbSet<RefreshTokenDb> RefreshTokens { get; set; }
-        //public DbSet<BookFileJoinDb> BookFileJoin { get; set; }
+        public DbSet<BookCategoryJoin> BookCategoryJoin { get; set; }
         public DbSet<BookAuthorJoinDb> BookAuthorJoin { get; set; }
         public DbSet<CategoryDb> Category { get; set; }
         public DbSet<FileDb> File { get; set; }

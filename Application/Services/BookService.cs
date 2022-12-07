@@ -16,12 +16,16 @@ namespace Application.Services
     {
         private readonly IWebHostEnvironment _hosting;
         private readonly IBookRepository _bookRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BookService(IWebHostEnvironment hosting,
-            IBookRepository bookRepository)
+        public BookService(
+            IWebHostEnvironment hosting,
+            IBookRepository bookRepository,
+            IUnitOfWork unitOfWork)
         {
             _hosting = hosting;
             _bookRepository = bookRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public void Add(AddBookRequestDto requestDto)
@@ -39,29 +43,9 @@ namespace Application.Services
                 BookAuthorJoin = new List<BookAuthorJoinDb>()
             };
 
-            List<CategoryDb> categories =
-                _bookRepository.GetCategoryLstByIds(requestDto.CategoryIds);
+            SetCategoriesToBookByIds(newEntry, requestDto.CategoryIds);
 
-            foreach (var cat in categories)
-            {
-                newEntry.BookCategoryJoin.Add(new BookCategoryJoin
-                {
-                    Book = newEntry,
-                    Category = cat
-                });
-            }
-
-            List<AuthorDb> authors =
-                _bookRepository.GetAuthorLstByIds(requestDto.AuthorIds);
-
-            foreach (var auth in authors)
-            {
-                newEntry.BookAuthorJoin.Add(new BookAuthorJoinDb
-                {
-                    Book = newEntry,
-                    Author = auth
-                });
-            }
+            SetAuthorsToBookByIds(newEntry, requestDto.AuthorIds);
 
             _bookRepository.Add(newEntry);
         }
@@ -71,7 +55,62 @@ namespace Application.Services
             _bookRepository.Delete(requestDto.Id);
         }
 
+        public void Update(UpdateBookRequestDto requestDto)
+        {
+            var entry = _bookRepository.GetById(requestDto.Id);
+
+            _unitOfWork.OpenTransaction();
+
+            entry.Description = requestDto.Description;
+            entry.PageCount = requestDto.PageCount;
+            entry.Title = requestDto.Title;
+            entry.Year = requestDto.Year;
+
+            _bookRepository.DropBookRelations(entry);
+
+            if (requestDto.File != null)
+                entry.Cover = SaveFile(requestDto.File);
+
+            SetCategoriesToBookByIds(entry, requestDto.CategoryIds);
+
+            SetAuthorsToBookByIds(entry, requestDto.AuthorIds);
+
+            _unitOfWork.Commit();
+        }
+
         #region Helpers
+
+        private void SetCategoriesToBookByIds(BookDb book, List<int> ids)
+        {
+            List<CategoryDb> categories =
+                _bookRepository.GetCategoryLstByIds(ids);
+
+            foreach (var cat in categories)
+            {
+                book.BookCategoryJoin.Add(new BookCategoryJoin
+                {
+                    Book = book,
+                    Category = cat
+                });
+            }
+        }
+
+        private void SetAuthorsToBookByIds(BookDb book, List<int> ids)
+        {
+            List<AuthorDb> authors =
+                _bookRepository.GetAuthorLstByIds(ids);
+
+            foreach (var auth in authors)
+            {
+                book.BookAuthorJoin.Add(new BookAuthorJoinDb
+                {
+                    Book = book,
+                    Author = auth
+                });
+            }
+        }
+
+
         private FileDb SaveFile(IFormFile file)
         {
             string savePath = Path.Combine(_hosting.ContentRootPath, "wwwroot", "uploads");

@@ -29,6 +29,24 @@ namespace Infrastructure.Repositories
             return result;
         }
 
+        public BookDb GetById(int id)
+        {
+            var result = _context.Book
+                .Where(x => x.Id == id)
+                .Include(x => x.Cover)
+                .Include(x => x.BookAuthorJoin)
+                .Include(x => x.BookCategoryJoin)
+                .First();
+
+            return result;
+        }
+
+        public void DropBookRelations(BookDb book)
+        {
+            _context.BookAuthorJoin.RemoveRange(book.BookAuthorJoin);
+            _context.BookCategoryJoin.RemoveRange(book.BookCategoryJoin);
+        }
+
         public void AddFile(FileDb newEntry)
         {
             _context.File.Add(newEntry);

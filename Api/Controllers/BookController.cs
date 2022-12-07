@@ -67,14 +67,21 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/book/update")]
-        public async Task<object> UpdateBook(DeleteBookRequestDto requestDto)
+        public async Task<object> UpdateBook([FromForm] UpdateBookRequestDto requestDto)
         {
             try
             {
-                _bookService.Delete(requestDto);
+                if ((HttpContext.Request.Form.Files != null) &&
+                    (HttpContext.Request.Form.Files.Count == 1) &&
+                    (CheckAllowedFileFormat(Request.Form.Files[0])))
+                {
+                    requestDto.File = Request.Form.Files[0];
+                }
+
+                _bookService.Update(requestDto);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest("Не удалось удалить книгу");
             }

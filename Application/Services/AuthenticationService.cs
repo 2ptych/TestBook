@@ -13,13 +13,21 @@ namespace Application.Services
     {
         private readonly ITokenIssuerService _tokenIssuerService;
         private readonly IAuthenticationRepository _authenticationRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public AuthenticationService(
             ITokenIssuerService tokenIssuerService,
-            IAuthenticationRepository authenticationRepository)
+            IAuthenticationRepository authenticationRepository,
+            IUnitOfWork unitOfWork)
         {
             _tokenIssuerService = tokenIssuerService;
             _authenticationRepository = authenticationRepository;
+            _unitOfWork = unitOfWork;
+        }
+
+        public class TokenOutput
+        {
+            public string AccessToken { get; set; }
         }
 
         public LoginResponseDto LoginAsync(LoginRequestDto requestDto)
@@ -38,7 +46,7 @@ namespace Application.Services
                 var refreshTokenData =
                     _tokenIssuerService.IssueRefreshToken(requestDto.Login);
 
-                _authenticationRepository.AddRefreshToken(
+                var refTokenEntity = _authenticationRepository.AddRefreshToken(
                     refreshTokenData.RefreshToken,
                     requestDto.Login,
                     refreshTokenData.ExpiredAt);
@@ -56,9 +64,37 @@ namespace Application.Services
             var hash =
                 _authenticationRepository.GetMD5Hash(requestDto.RefreshToken);
 
-            if (hash != null)
-            {
+            var refreshTokenEntity =
+                _authenticationRepository.GetRefreshTokenByHash(hash);
 
+            if (refreshTokenEntity != null)
+            {
+                _unitOfWork.OpenTransaction();
+
+                var user =
+                    _authenticationRepository.GetUserByUserNameOrNull(refreshTokenEntity.UserName);
+
+                var output = new LoginResponseDto();
+
+                output.AccessToken =
+                    _tokenIssuerService.IssueJwtToken(
+                        user.UserName,
+                        user.Role.Title.ToLower());
+                var refreshTokenData =
+                    _tokenIssuerService.IssueRefreshToken(user.UserName);
+
+                var refTokenEntity = _authenticationRepository.AddRefreshToken(
+                    refreshTokenData.RefreshToken,
+                    user.UserName,
+                    refreshTokenData.ExpiredAt);
+
+                refreshTokenEntity.IsUsed = true;
+
+                _unitOfWork.Commit();
+
+                output.RefreshToken = refreshTokenData.RefreshToken;
+
+                return output;
             }
             else throw new UnauthorizedAccessException();
 

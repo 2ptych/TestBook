@@ -29,3 +29,4 @@ C:\Users\Nikolay\Documents\GitHub\TestBook\Infrastructure\obj\Debug\netcoreapp3.
 C:\Users\Nikolay\Documents\GitHub\TestBook\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
 C:\Users\Nikolay\Documents\GitHub\TestBook\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
 C:\Users\Nikolay\Documents\GitHub\TestBook\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.genruntimeconfig.cache
+C:\Users\Nick\source\TestBooks\TestBook\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csprojAssemblyReference.cache

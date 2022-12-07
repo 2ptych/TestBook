@@ -53,7 +53,8 @@ namespace Api.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return new ForbidResult();
+                //return new ForbidResult();
+                return new UnauthorizedResult();
             }
             catch (Exception ex)
             {

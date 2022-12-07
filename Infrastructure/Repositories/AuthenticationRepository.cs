@@ -29,7 +29,7 @@ namespace Infrastructure.Repositories
             return user;
         }
 
-        public void AddRefreshToken(string token, string userName, DateTime expiredAt)
+        public RefreshTokenDb AddRefreshToken(string token, string userName, DateTime expiredAt)
         {
             RefreshTokenDb refreshToken = new RefreshTokenDb
             {
@@ -43,6 +43,8 @@ namespace Infrastructure.Repositories
 
             _context.RefreshTokens.Add(refreshToken);
             _context.SaveChanges();
+
+            return refreshToken;
         }
 
         public RefreshTokenDb GetRefreshTokenByHash(string hash)

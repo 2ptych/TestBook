@@ -61,10 +61,12 @@ namespace Infrastructure.Repositories
 
         public void Delete(int id)
         {
-            var result = _context.Book
+            var result = GetById(id);
+            //DropBookRelations(result);
+                /*_context.Book
                 .Where(x => x.Id == id)
                 .Include(x => x.Cover)
-                .First();
+                .First();*/
 
             _context.Book.Remove(result);
             _context.SaveChanges();

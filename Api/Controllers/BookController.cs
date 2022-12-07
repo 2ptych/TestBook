@@ -52,7 +52,7 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("api/book/delete/{requestDto.Id}")]
-        public async Task<object> DeleteBook(DeleteBookRequestDto requestDto)
+        public async Task<object> DeleteBook([FromRoute] DeleteBookRequestDto requestDto)
         {
             try
             {

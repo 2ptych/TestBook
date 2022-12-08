@@ -10,5 +10,6 @@ namespace Infrastructure.Models
         public string UserName { get; set; }
         public virtual RoleDb Role { get; set; }
         public string Password { get; set; }
+        public List<UserFavoritesJoinDb> UserFavoritesJoin { get; set; }
     }
 }

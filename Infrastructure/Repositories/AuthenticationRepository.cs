@@ -29,6 +29,16 @@ namespace Infrastructure.Repositories
             return user;
         }
 
+        public UserDb GetUserById(int id)
+        {
+            UserDb user = _context.Users
+                .Where(x => x.Id == id)
+                .Include(x => x.Role)
+                .First();
+
+            return user;
+        }
+
         public RefreshTokenDb AddRefreshToken(string token, string userName, DateTime expiredAt)
         {
             RefreshTokenDb refreshToken = new RefreshTokenDb

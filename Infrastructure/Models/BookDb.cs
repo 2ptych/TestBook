@@ -15,7 +15,7 @@ namespace Infrastructure.Models
 
         // navigational
         public virtual List<BookAuthorJoinDb> BookAuthorJoin { get; set; }
-        //public virtual List<BookFileJoinDb> BookFileJoin { get; set; }
         public virtual List<BookCategoryJoin> BookCategoryJoin { get; set; }
+        public List<UserFavoritesJoinDb> UserFavoritesJoin { get; set; }
     }
 }

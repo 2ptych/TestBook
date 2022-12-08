@@ -52,6 +52,17 @@ namespace Infrastructure.Context
                 .WithMany(x => x.BookCategoryJoin)
                 .HasForeignKey(x => x.CategoryId);
 
+            modelBuilder.Entity<UserFavoritesJoinDb>()
+                .HasKey(x => new { x.BookId, x.UserId });
+            modelBuilder.Entity<UserFavoritesJoinDb>()
+                .HasOne(x => x.Book)
+                .WithMany(m => m.UserFavoritesJoin)
+                .HasForeignKey(x => x.BookId);
+            modelBuilder.Entity<UserFavoritesJoinDb>()
+                .HasOne(x => x.User)
+                .WithMany(m => m.UserFavoritesJoin)
+                .HasForeignKey(x => x.UserId);
+
             modelBuilder.Entity<UserDb>()
                 .HasIndex(x => x.UserName)
                 .IsUnique();
@@ -66,6 +77,6 @@ namespace Infrastructure.Context
         public DbSet<CategoryDb> Category { get; set; }
         public DbSet<FileDb> File { get; set; }
         public DbSet<AuthorDb> Author { get; set; }
-
+        public DbSet<UserFavoritesJoinDb> UserFavoritesJoin { get; set; }
     }
 }

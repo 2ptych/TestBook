@@ -8,6 +8,7 @@ namespace Infrastructure.Interfaces
     public interface IAuthenticationRepository
     {
         UserDb GetUserByUserNameOrNull(string userName);
+        UserDb GetUserById(int id);
         RefreshTokenDb AddRefreshToken(
             string token, string userName, DateTime expiredAt);
         string GetMD5Hash(string str);

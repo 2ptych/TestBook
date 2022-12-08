@@ -16,6 +16,8 @@ namespace Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BookSearchView>().HasNoKey();
+
             // один-ко-многим книги-авторы
             modelBuilder.Entity<BookAuthorJoinDb>()
                 .HasKey(x => new { x.AuthorId, x.BookId });
@@ -68,6 +70,7 @@ namespace Infrastructure.Context
                 .IsUnique();
         }
 
+        public DbSet<BookSearchView> BookSearchView { get; set; }
         public DbSet<RoleDb> Role { get; set; }
         public DbSet<UserDb> Users { get; set; }
         public DbSet<BookDb> Book { get; set; }

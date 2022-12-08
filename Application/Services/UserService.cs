@@ -4,6 +4,7 @@ using Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Application.Services
 {
@@ -24,6 +25,19 @@ namespace Application.Services
         public void DeleteBookFromUsersFavorites(DeleteBookFromFvrtDto requestDto)
         {
             _userRepository.DeleteBookFromUserFavorites(requestDto.Book, requestDto.User);
+        }
+
+        public SearchBooksResponseDto SearchBooks(
+            SearchBooksRequestDto requestDto,
+            CancellationToken token)
+        {
+            if (!token.IsCancellationRequested)
+            {
+                
+            }
+            else token.ThrowIfCancellationRequested();
+
+            return new SearchBooksResponseDto();
         }
     }
 }

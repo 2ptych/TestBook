@@ -7,12 +7,12 @@ namespace Infrastructure
     public class SqlQueries
     {
         public readonly static string BookSearchByTitle =
-            "Select * from \"Book\" bk " +
+            "Select bk.\"Id\" as \"BookId\" from \"Book\" bk " +
             "where bk.\"Title\" ILIKE '%{0}%' ";
 
         public readonly static string BookSearchByTitleWithCategories =
             "Select " +
-                "bk.\"Id\" " +
+                "bk.\"Id\" as \"BookId\" " +
             "from " +
                 "(Select * from \"BookCategoryJoin\" bcj " +
                 "where bcj.\"CategoryId\" in ({1})) x " +

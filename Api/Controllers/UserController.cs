@@ -53,18 +53,20 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/search-books")]
-        public async Task<object> SearchBooks(
+        public object SearchBooks(
+            [FromBody]
             SearchBooksRequestDto requestDto,
             CancellationToken cancellationToken)
         {
             try
             {
-                _userService.SearchBooks(requestDto, cancellationToken);
-                return Ok();
+                var result =
+                    _userService.SearchBooks(requestDto, cancellationToken);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return BadRequest("Не удалось удалить книгу из избранного");
+                return BadRequest("Не удалось произвести поиск");
             }
         }
     }

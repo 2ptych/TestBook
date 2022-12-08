@@ -14,10 +14,13 @@ namespace Infrastructure.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _context;
+        private readonly IBookRepository _bookRepository;
 
-        public UserRepository(AppDbContext context)
+        public UserRepository(AppDbContext context,
+            IBookRepository bookRepository)
         {
             _context = context;
+            _bookRepository = bookRepository;
         }
 
         public void AddBookToUserFavorites(BookDb book, UserDb user)
@@ -48,7 +51,7 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public void SearchBooks(
+        public List<BookDb> SearchBooks(
             string searchStr,
             List<int> categoryIds,
             CancellationToken cancellationToken)
@@ -79,6 +82,12 @@ namespace Infrastructure.Repositories
                     .FromSqlRaw(query)
                     .ToList();
             }
+
+            if (cancellationToken.IsCancellationRequested)
+                cancellationToken.ThrowIfCancellationRequested();
+
+            return _bookRepository.GetLstByIds(
+                result.Select(x => x.BookId).ToList());
         }
     }
 }

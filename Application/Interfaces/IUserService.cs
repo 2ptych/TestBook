@@ -10,7 +10,7 @@ namespace Application.Interfaces
     {
         void AddBookToUserFavorites(AddBookToFvrtDto requestDto);
         void DeleteBookFromUsersFavorites(DeleteBookFromFvrtDto requestDto);
-        SearchBooksResponseDto SearchBooks(
+        List<SearchBooksResponseDto> SearchBooks(
             SearchBooksRequestDto requestDto,
             CancellationToken token);
     }

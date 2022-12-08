@@ -41,6 +41,20 @@ namespace Infrastructure.Repositories
             return result;
         }
 
+        public List<BookDb> GetLstByIds(List<int> ids)
+        {
+            var result = _context.Book
+                .Where(x => ids.Contains(x.Id))
+                .Include(x => x.Cover)
+                .Include(x => x.BookAuthorJoin)
+                    .ThenInclude(x => x.Author)
+                .Include(x => x.BookCategoryJoin)
+                    .ThenInclude(x => x.Category)
+                .ToList();
+
+            return result;
+        }
+
         public void DropBookRelations(BookDb book)
         {
             _context.BookAuthorJoin.RemoveRange(book.BookAuthorJoin);
@@ -62,11 +76,6 @@ namespace Infrastructure.Repositories
         public void Delete(int id)
         {
             var result = GetById(id);
-            //DropBookRelations(result);
-                /*_context.Book
-                .Where(x => x.Id == id)
-                .Include(x => x.Cover)
-                .First();*/
 
             _context.Book.Remove(result);
             _context.SaveChanges();

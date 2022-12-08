@@ -48,7 +48,9 @@ namespace Api
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IBookService, BookService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

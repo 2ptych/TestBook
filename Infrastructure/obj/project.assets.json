@@ -906,7 +906,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nikolay\\.nuget\\packages\\": {}
+    "C:\\Users\\Nikolay\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -917,6 +918,9 @@
       "packagesPath": "C:\\Users\\Nikolay\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Nikolay\\Documents\\GitHub\\TestBook\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\Nikolay\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -926,6 +930,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "\\\\WIN-5R2RM82DA19\\Mirtek Nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

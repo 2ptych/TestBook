@@ -7,9 +7,9 @@ namespace Infrastructure.Models
     public class BookAuthorJoinDb
     {
         public int BookId { get; set; }
-        public virtual BookDb Book { get; set; }
+        public BookDb Book { get; set; }
         public int AuthorId { get; set; }
-        public virtual AuthorDb Author { get; set; }
+        public AuthorDb Author { get; set; }
         public int Order { get; set; }
     }
 }

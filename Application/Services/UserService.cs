@@ -19,12 +19,12 @@ namespace Application.Services
             _userRepository = userRepository;
         }
 
-        public void AddBookToUserFavorites(AddBookToFvrtDto requestDto)
+        public void AddBookToUserFavorites(UserFavoritesHandleDto requestDto)
         {
             _userRepository.AddBookToUserFavorites(requestDto.Book, requestDto.User);
         }
 
-        public void DeleteBookFromUsersFavorites(DeleteBookFromFvrtDto requestDto)
+        public void DeleteBookFromUsersFavorites(UserFavoritesHandleDto requestDto)
         {
             _userRepository.DeleteBookFromUserFavorites(requestDto.Book, requestDto.User);
         }

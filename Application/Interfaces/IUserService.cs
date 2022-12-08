@@ -8,8 +8,8 @@ namespace Application.Interfaces
 {
     public interface IUserService
     {
-        void AddBookToUserFavorites(AddBookToFvrtDto requestDto);
-        void DeleteBookFromUsersFavorites(DeleteBookFromFvrtDto requestDto);
+        void AddBookToUserFavorites(UserFavoritesHandleDto requestDto);
+        void DeleteBookFromUsersFavorites(UserFavoritesHandleDto requestDto);
         List<SearchBooksResponseDto> SearchBooks(
             SearchBooksRequestDto requestDto,
             CancellationToken token);

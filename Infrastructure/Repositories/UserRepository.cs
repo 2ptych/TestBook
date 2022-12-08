@@ -25,18 +25,29 @@ namespace Infrastructure.Repositories
 
         public void AddBookToUserFavorites(BookDb book, UserDb user)
         {
-            _context.UserFavoritesJoin.Add(new UserFavoritesJoinDb
+            var existed = _context.UserFavoritesJoin.AsNoTracking()
+                //.Include(x => x.Book)
+                //.Include(x => x.User)
+                .Where(x =>
+                    (x.UserId == user.Id) &&
+                    (x.BookId == book.Id))
+                .FirstOrDefault();
+
+            if (existed == null)
             {
-                User = user,
-                Book = book
-            });
-            _context.SaveChanges();
+                _context.UserFavoritesJoin.Add(new UserFavoritesJoinDb
+                {
+                    User = user,
+                    Book = book
+                });
+                _context.SaveChanges();
+            }
         }
 
         public void DeleteBookFromUserFavorites(BookDb book, UserDb user)
         {
             var bookInFavorites =
-                _context.UserFavoritesJoin
+                _context.UserFavoritesJoin.AsNoTracking()
                 //.Include(x => x.Book)
                 //.Include(x => x.User)
                 .Where(x =>

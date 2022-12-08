@@ -23,7 +23,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/add-to-favorites")]
-        public async Task<object> AddBookToFvrt(AddBookToFvrtDto requestDto)
+        public async Task<object> AddBookToFvrt(UserFavoritesHandleDto requestDto)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/remove-from-favorites")]
-        public async Task<object> DeleteBookFromFvrt(DeleteBookFromFvrtDto requestDto)
+        public async Task<object> DeleteBookFromFvrt(UserFavoritesHandleDto requestDto)
         {
             try
             {

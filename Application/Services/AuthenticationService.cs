@@ -30,7 +30,7 @@ namespace Application.Services
             public string AccessToken { get; set; }
         }
 
-        public LoginResponseDto LoginAsync(LoginRequestDto requestDto)
+        public LoginResponseDto Login(LoginRequestDto requestDto)
         {
             LoginResponseDto result = new LoginResponseDto();
             var user =

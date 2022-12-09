@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace Api.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
@@ -24,27 +26,27 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/login")]
-        public async Task<object> Login(LoginRequestDto requestDto)
+        public object Login(LoginRequestDto requestDto)
         {
             try
             {
-                var result = _authenticationService.LoginAsync(requestDto);
+                var result = _authenticationService.Login(requestDto);
                 return result;
             }
             catch (UnauthorizedAccessException ex)
             {
                 return Unauthorized();
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest();
+                return BadRequest("Не удалось авторизоваться");
             }
             
         }
 
         [HttpPost]
         [Route("api/refresh")]
-        public async Task<object> RefreshToken([FromBody] RefreshTokenDto requestDto)
+        public object RefreshToken([FromBody] RefreshTokenDto requestDto)
         {
             try
             {
@@ -53,12 +55,11 @@ namespace Api.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                //return new ForbidResult();
                 return new UnauthorizedResult();
             }
-            catch (Exception ex)
+            catch
             {
-                return BadRequest();
+                return BadRequest("Не удалось авторизоваться");
             }
         }
     }

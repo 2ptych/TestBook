@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Authorize("user")]
         [Route("api/add-to-favorites")]
         public async Task<object> AddBookToFvrt(UserFavoritesHandleDto requestDto)
         {
@@ -30,13 +32,14 @@ namespace Api.Controllers
                 _userService.AddBookToUserFavorites(requestDto);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("Не удалось добавить книгу в избранное");
             }
         }
 
         [HttpPost]
+        [Authorize("user")]
         [Route("api/remove-from-favorites")]
         public async Task<object> DeleteBookFromFvrt(UserFavoritesHandleDto requestDto)
         {
@@ -45,13 +48,14 @@ namespace Api.Controllers
                 _userService.DeleteBookFromUsersFavorites(requestDto);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("Не удалось удалить книгу из избранного");
             }
         }
 
         [HttpPost]
+        [Authorize("user")]
         [Route("api/search-books")]
         public object SearchBooks(
             [FromBody]
@@ -64,7 +68,7 @@ namespace Api.Controllers
                     _userService.SearchBooks(requestDto, cancellationToken);
                 return Ok(result);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("Не удалось произвести поиск");
             }

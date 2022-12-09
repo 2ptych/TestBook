@@ -23,8 +23,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Authorize("admin")]
         [Route("api/book/add")]
-        public async Task<object> AddBook(
+        public object AddBook(
             [FromForm] AddBookRequestDto requestDto)
         {
             try
@@ -45,15 +46,16 @@ namespace Api.Controllers
                     "В качестве обложки необходимо " +
                     "приложить 1 файл в формате jpg");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("Не удалось добавить книгу");
             }
         }
 
         [HttpGet]
+        [Authorize("admin")]
         [Route("api/book/delete/{requestDto.Id}")]
-        public async Task<object> DeleteBook([FromRoute] DeleteBookRequestDto requestDto)
+        public object DeleteBook([FromRoute] DeleteBookRequestDto requestDto)
         {
             try
             {
@@ -67,8 +69,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Authorize("admin")]
         [Route("api/book/update")]
-        public async Task<object> UpdateBook([FromForm] UpdateBookRequestDto requestDto)
+        public object UpdateBook([FromForm] UpdateBookRequestDto requestDto)
         {
             try
             {
@@ -82,7 +85,7 @@ namespace Api.Controllers
                 _bookService.Update(requestDto);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("Не удалось удалить книгу");
             }

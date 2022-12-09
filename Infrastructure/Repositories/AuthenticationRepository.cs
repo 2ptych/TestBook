@@ -59,10 +59,12 @@ namespace Infrastructure.Repositories
 
         public RefreshTokenDb GetRefreshTokenByHash(string hash)
         {
+            DateTime nowDT = DateTime.Now;
             var token = _context.RefreshTokens
                 .Where(x =>
                     (x.IsRevoked == false) &&
-                    (x.IsUsed == false))
+                    (x.IsUsed == false) &&
+                    (x.ExpiredAt > nowDT))
                 .Where(x => x.TokenHash == hash)
                 .FirstOrDefault();
 

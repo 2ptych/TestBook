@@ -7,7 +7,7 @@ namespace Application.Interfaces
 {
     public interface IAuthenticationService
     {
-        LoginResponseDto LoginAsync(LoginRequestDto requestDto);
+        LoginResponseDto Login(LoginRequestDto requestDto);
         LoginResponseDto RefreshToken(RefreshTokenDto requestDto);
     }
 }

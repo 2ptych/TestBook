@@ -55,7 +55,8 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        [Authorize("user")]
+        [AllowAnonymous]
+        //[Authorize("user")]
         [Route("api/search-books")]
         public object SearchBooks(
             [FromBody]
@@ -68,8 +69,10 @@ namespace Api.Controllers
                     _userService.SearchBooks(requestDto, cancellationToken);
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                if (ex is OperationCanceledException)
+                    return Ok("Операция прервана");
                 return BadRequest("Не удалось произвести поиск");
             }
         }

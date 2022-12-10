@@ -62,43 +62,6 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public List<BookDb> SearchBooks(
-            string searchStr,
-            List<int> categoryIds,
-            CancellationToken cancellationToken)
-        {
-            if (cancellationToken.IsCancellationRequested)
-                cancellationToken.ThrowIfCancellationRequested();
-
-            var result = new List<BookSearchView>();
-            string query = string.Empty;
-            if (categoryIds.Count == 0)
-            {
-                query = string.Format(
-                    SqlQueries.BookSearchByTitle,
-                    searchStr);
-
-                result = _context.BookSearchView
-                    .FromSqlRaw(query)
-                    .ToList();
-            }
-            else
-            {
-                query = string.Format(
-                    SqlQueries.BookSearchByTitleWithCategories,
-                    searchStr,
-                    string.Join(",", categoryIds));
-
-                result = _context.BookSearchView
-                    .FromSqlRaw(query)
-                    .ToList();
-            }
-
-            if (cancellationToken.IsCancellationRequested)
-                cancellationToken.ThrowIfCancellationRequested();
-
-            return _bookRepository.GetLstByIds(
-                result.Select(x => x.BookId).ToList());
-        }
+        
     }
 }

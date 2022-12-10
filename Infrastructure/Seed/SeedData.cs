@@ -22,7 +22,8 @@ namespace Infrastructure.Seed
             {
                 Book1,
                 Book2,
-                Book3
+                Book3,
+                Book4
             });
             context.Users.AddRange(Users);
             context.SaveChanges();
@@ -113,14 +114,19 @@ namespace Infrastructure.Seed
             {
                 new BookCategoryJoin
                 {
-                    Book = Book3,
+                    Book = Book1,
                     Category = Categories[1]
                 },
                 new BookCategoryJoin
                 {
-                    Book = Book3,
+                    Book = Book1,
                     Category = Categories[2]
                 }
+            },
+            Cover = new FileDb
+            {
+                FileName = "patterns.jpg",
+                Hash = "eba0cd9cd4e1b8bde63409947d2a9f32"
             }
         };
 
@@ -143,14 +149,19 @@ namespace Infrastructure.Seed
             {
                 new BookCategoryJoin
                 {
-                    Book = Book3,
+                    Book = Book2,
                     Category = Categories[1]
                 },
                 new BookCategoryJoin
                 {
-                    Book = Book3,
+                    Book = Book2,
                     Category = Categories[2]
                 }
+            },
+            Cover = new FileDb
+            {
+                FileName = "clean.jpg",
+                Hash = "7251907ed09299f9fc19a7a67c8daa63"
             }
         };
 
@@ -164,7 +175,7 @@ namespace Infrastructure.Seed
             {
                 new BookAuthorJoinDb
                 {
-                    Book = Book2,
+                    Book = Book3,
                     Author = Authors[4],
                     Order = 1
                 }
@@ -180,6 +191,41 @@ namespace Infrastructure.Seed
                 {
                     Book = Book3,
                     Category = Categories[3]
+                }
+            },
+            Cover = new FileDb
+            {
+                FileName = "operations.jpg",
+                Hash = "dd1ab067b215d9e7e005ef0b087f17ff"
+            }
+        };
+
+        private static BookDb Book4 = new BookDb
+        {
+            Year = 2003,
+            Description = "Улучшение существующего кода",
+            Title = "Рефакторинг",
+            PageCount = 429,
+            Cover = new FileDb
+            {
+                Hash = "5db5718803f64d65f931deaca571fde4",
+                FileName = "refactoring.jpg"
+            },
+            BookAuthorJoin = new List<BookAuthorJoinDb>
+            {
+                new BookAuthorJoinDb
+                {
+                    Book = Book4,
+                    Author = Authors[5],
+                    Order = 1
+                }
+            },
+            BookCategoryJoin = new List<BookCategoryJoin>
+            {
+                new BookCategoryJoin
+                {
+                    Book = Book4,
+                    Category = Categories[1]
                 }
             }
         };

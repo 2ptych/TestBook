@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Authorize("user")]
     [ApiController]
     public class BookController : ControllerBase
     {
@@ -23,7 +22,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        [Authorize("admin")]
+        [AllowAnonymous]//[Authorize("admin")]
         [Route("api/book/add")]
         public object AddBook(
             [FromForm] AddBookRequestDto requestDto)

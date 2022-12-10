@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 
 namespace Application.Services
 {
@@ -78,7 +79,79 @@ namespace Application.Services
             _unitOfWork.Commit();
         }
 
+        public List<SearchBooksResponseDto> SearchBooks(
+            SearchBooksRequestDto requestDto,
+            CancellationToken token)
+        {
+
+            var result = new List<SearchBooksResponseDto>();
+
+            if (token.IsCancellationRequested)
+                token.ThrowIfCancellationRequested();
+
+            var books = _bookRepository.SearchBooks(
+                    requestDto.SearchString,
+                    requestDto.CategoryIds,
+                    token);
+
+            foreach (var book in books)
+            {
+                if (token.IsCancellationRequested)
+                    token.ThrowIfCancellationRequested();
+
+                result.Add(BookDbToSrchBkRespDto(book));
+
+
+            }
+
+            return result;
+        }
+
+        /*public string GetBookCoverLink(BookDb book)
+        {
+
+        }*/
+
         #region Helpers
+
+        private SearchBooksResponseDto BookDbToSrchBkRespDto(BookDb book)
+        {
+            var result = new SearchBooksResponseDto
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Authors = new List<SBObject>(),
+                Categories = new List<SBObject>()
+            };
+
+            foreach (var auth in book.BookAuthorJoin)
+            {
+                result.Authors.Add(new SBObject
+                {
+                    Id = auth.Author.Id,
+                    Name = auth.Author.FullName
+                });
+            }
+
+            foreach (var cat in book.BookCategoryJoin)
+            {
+                result.Categories.Add(new SBObject
+                {
+                    Id = cat.Category.Id,
+                    Name = cat.Category.Title
+                });
+            }
+
+            if (book.Cover != null)
+                result.Cover =
+                    string.Join(
+                        "/",
+                        GetPicturePath(),
+                        book.Cover.Hash) +
+                        Path.GetExtension(book.Cover.FileName);
+
+            return result;
+        }
 
         private void SetCategoriesToBookByIds(BookDb book, List<int> ids)
         {
@@ -110,10 +183,21 @@ namespace Application.Services
             }
         }
 
+        public string GetPicturePath()
+        {
+            return "http://localhost:5555/images";
+                //_hosting.ContentRootPath, "wwwroot", "uploads");
+        }
+
+        public string GetUploadPath()
+        {
+            return Path.Combine(
+                _hosting.ContentRootPath, "wwwroot", "uploads");
+        }
 
         private FileDb SaveFile(IFormFile file)
         {
-            string savePath = Path.Combine(_hosting.ContentRootPath, "wwwroot", "uploads");
+            string savePath = GetUploadPath();
 
             var stream = new MemoryStream();
             file.CopyTo(stream);
@@ -124,7 +208,9 @@ namespace Application.Services
                 Hash = ComputeHash(stream)
             };
 
-            var fullPath = Path.Combine(savePath, result.Hash);
+            var fullPath = Path.Combine(
+                savePath,
+                result.Hash + Path.GetExtension(file.FileName));
 
             var existedFile = _bookRepository.GetFileByHashOrNull(result.Hash);
 
@@ -149,13 +235,16 @@ namespace Application.Services
 
         private string ComputeHash(Stream fStream)
         {
+            var result = "";
+            fStream.Position = 0;
             using (var md5 = MD5.Create())
             {
                 var hash = md5.ComputeHash(fStream);
-                return BitConverter.ToString(hash)
+                result = BitConverter.ToString(hash)
                     .Replace("-", "")
                     .ToLower();
             }
+            return result;
         }
         #endregion
     }

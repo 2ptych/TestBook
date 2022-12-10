@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Infrastructure.Interfaces
 {
@@ -16,5 +17,9 @@ namespace Infrastructure.Interfaces
         void DropBookRelations(BookDb book);
         List<CategoryDb> GetCategoryLstByIds(List<int> ids);
         List<AuthorDb> GetAuthorLstByIds(List<int> ids);
+        public List<BookDb> SearchBooks(
+            string searchStr,
+            List<int> categoryIds,
+            CancellationToken cancellationToken);
     }
 }

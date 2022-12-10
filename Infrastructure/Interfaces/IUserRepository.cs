@@ -10,9 +10,5 @@ namespace Infrastructure.Interfaces
     {
         void AddBookToUserFavorites(BookDb book, UserDb user);
         void DeleteBookFromUserFavorites(BookDb book, UserDb user);
-        List<BookDb> SearchBooks(
-            string searchStr,
-            List<int> categoryIds,
-            CancellationToken cancellationToken);
     }
 }

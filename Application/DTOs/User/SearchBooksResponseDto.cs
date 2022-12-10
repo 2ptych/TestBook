@@ -10,6 +10,7 @@ namespace Application.DTOs
         public string Title { get; set; }
         public List<SBObject> Categories { get; set; }
         public List<SBObject> Authors { get; set; }
+        public string Cover { get; set; }
     }
 
     public class SBObject
